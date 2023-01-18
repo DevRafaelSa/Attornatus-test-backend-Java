@@ -4,6 +4,7 @@ import br.com.rafael.peoplemanegement.models.Endereco;
 import br.com.rafael.peoplemanegement.models.Pessoa;
 import br.com.rafael.peoplemanegement.repositories.PessoaRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,9 +15,13 @@ import java.util.List;
 @Getter @Setter @NoArgsConstructor
 public class PessoaForm {
 
+    @NotBlank
     private String name;
+
+    @NotBlank
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDate;
+
     private List<Endereco> enderecos;
 
     public PessoaForm(String name, LocalDate birthDate) {

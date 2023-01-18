@@ -1,6 +1,7 @@
 package br.com.rafael.peoplemanegement.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,9 +16,16 @@ public class Endereco implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Logradouro é obrigatório")
     private String logradouro;
+
+    @NotNull(message = "CEP é obrigatório")
     private String cep;
+
+    @NotNull(message = "Não pode ser nulo")
     private String numero;
+
+    @NotNull(message = "Cidade é obrigatório")
     private String cidade;
 
     @ManyToOne
