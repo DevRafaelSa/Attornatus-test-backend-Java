@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class PessoaDto implements Serializable {
 
     private Long id;
     private String name;
-    private Date birthDate;
+    private LocalDate birthDate;
     private List<Endereco> enderecos;
 
     public PessoaDto(Pessoa pessoa) {

@@ -5,10 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.time.LocalDate;
 
 @Transactional
 @Repository
 public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
+
+    Boolean existsByNameAndAndBirthDate (String name, LocalDate birthDate);
 
 }

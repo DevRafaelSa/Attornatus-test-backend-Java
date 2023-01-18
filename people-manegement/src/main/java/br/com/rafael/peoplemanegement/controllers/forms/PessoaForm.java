@@ -3,21 +3,23 @@ package br.com.rafael.peoplemanegement.controllers.forms;
 import br.com.rafael.peoplemanegement.models.Endereco;
 import br.com.rafael.peoplemanegement.models.Pessoa;
 import br.com.rafael.peoplemanegement.repositories.PessoaRepository;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor
 public class PessoaForm {
 
     private String name;
-    private Date birthDate;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate birthDate;
     private List<Endereco> enderecos;
 
-    public PessoaForm(String name, Date birthDate) {
+    public PessoaForm(String name, LocalDate birthDate) {
         this.name = name;
         this.birthDate = birthDate;
     }

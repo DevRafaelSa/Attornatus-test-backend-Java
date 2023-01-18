@@ -1,5 +1,6 @@
 package br.com.rafael.peoplemanegement.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -7,8 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,17 +24,19 @@ public class Pessoa implements Serializable {
     private String name;
 
     @NotNull(message = "Data de nascimento é obrigatório")
-    private Date birthDate;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate birthDate;
 
     @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
     private List<Endereco> enderecos;
 
-    public Pessoa(Long id, String name, Date birthDate) {
+    public Pessoa(String name, LocalDate birthDate) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
         this.enderecos = new ArrayList<>();
     }
+
 
     @Override
     public boolean equals(Object o) {
