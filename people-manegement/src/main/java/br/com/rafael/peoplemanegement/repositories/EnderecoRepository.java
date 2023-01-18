@@ -12,6 +12,7 @@ import java.util.Optional;
 @Repository
 public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
 
+    Boolean existsByLogradouroAndAndNumero (String logradouro, String numero);
     Optional<Endereco> findAllByPessoaId (Long idPessoa);
 
 }

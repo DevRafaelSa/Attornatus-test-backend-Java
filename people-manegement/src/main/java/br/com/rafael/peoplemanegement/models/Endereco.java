@@ -24,12 +24,11 @@ public class Endereco implements Serializable {
     @JoinColumn(name = "pessoa_id", nullable = false)
     private Pessoa pessoa;
 
-    public Endereco(Long id, String logradouro, String cep, String numero, String cidade, Pessoa pessoa) {
-        this.id = id;
+    public Endereco(String logradouro, String cep, String numero, String cidade, Pessoa pessoa) {
         this.logradouro = logradouro;
         this.cep = cep;
         this.numero = numero;
         this.cidade = cidade;
-        this.pessoa = pessoa;
+        pessoa.insereEndereco(this);
     }
 }

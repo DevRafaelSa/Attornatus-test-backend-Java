@@ -31,10 +31,13 @@ public class Pessoa implements Serializable {
     private List<Endereco> enderecos;
 
     public Pessoa(String name, LocalDate birthDate) {
-        this.id = id;
         this.name = name;
         this.birthDate = birthDate;
         this.enderecos = new ArrayList<>();
+    }
+
+    public void insereEndereco(Endereco endereco){
+        enderecos.add(endereco);
     }
 
 

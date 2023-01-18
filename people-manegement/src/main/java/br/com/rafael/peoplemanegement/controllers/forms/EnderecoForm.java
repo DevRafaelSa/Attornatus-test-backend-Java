@@ -18,6 +18,7 @@ public class EnderecoForm {
     private String cep;
     private String numero;
     private String cidade;
+    private Long idPessoa;
 
     public EnderecoForm(String logradouro, String cep, String numero, String cidade) {
         this.logradouro = logradouro;

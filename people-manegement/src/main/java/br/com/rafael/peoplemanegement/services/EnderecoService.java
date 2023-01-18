@@ -20,6 +20,9 @@ public class EnderecoService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
+    @Autowired
+    private PessoaRepository pessoaRepository;
+
     public List<Endereco> findall() {
         return enderecoRepository.findAll();
     }
@@ -27,5 +30,11 @@ public class EnderecoService {
     public Endereco findById(Long id) {
         Optional<Endereco> obj = enderecoRepository.findById(id);
         return obj.get();
+    }
+
+    public Optional<Pessoa> encontraPessoa(Long pessoaId) {
+        if(pessoaRepository.existsById(pessoaId)){
+            return pessoaRepository.findById(pessoaId);
+        } else return Optional.empty();
     }
 }
