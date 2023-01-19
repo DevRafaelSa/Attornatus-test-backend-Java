@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.Instant;
 
-//n interessa o hashcode e equals pq n queremos comparar um erro com o outro
 @NoArgsConstructor @AllArgsConstructor
 public class StandardError implements Serializable {
 

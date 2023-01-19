@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Getter @Setter @NoArgsConstructor
@@ -37,7 +36,6 @@ public class EnderecoForm {
         this.cep = cep;
         this.numero = numero;
         this.cidade = cidade;
-//        this.pessoas = Collections.singletonList(pessoa);
     }
 
     public Endereco atualizar(Long id, EnderecoRepository enderecoRepository){

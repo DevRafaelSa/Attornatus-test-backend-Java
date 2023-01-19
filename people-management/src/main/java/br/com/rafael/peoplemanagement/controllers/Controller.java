@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -106,4 +107,12 @@ public class Controller {
         return ResponseEntity.ok().body(list);
     }
 
+
+    @GetMapping(value = "/enderecoPrincipal/{idPessoa}")
+    public ResponseEntity<Endereco> retornaEnderecoPrincipal(@PathVariable Long idPessoa) {
+        Boolean enderecoPrincipal = true;
+        List<Endereco> endereco = enderecoService.encontrandoEnderecosDaPessoa(idPessoa);
+        Predicate<? super Endereco> predicate = enderecos -> enderecos.getPrincipal().equals(enderecoPrincipal);
+        return ResponseEntity.ok().body(endereco.stream().filter(predicate).findFirst().orElse(null));
+    }
 }
