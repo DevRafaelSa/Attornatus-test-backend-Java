@@ -5,6 +5,8 @@
 
 A aplicação solicitada por ocasião do Teste Técnico para uma vaga de Backend Java na Attornatus Procuradoria Digital consiste em uma API que gerencie e maneje pessoas e seus endereços, podendo ainda elencar, dentre este último, um endereço principal.
 
+
+
 ## Features/Serviços Solicitados
 - Criar uma pessoa
 - Editar uma pessoa
@@ -14,7 +16,8 @@ A aplicação solicitada por ocasião do Teste Técnico para uma vaga de Backend
 - Listar endereços da pessoa
 - Poder informar qual endereço é o principal da pessoa
 
-
+## Diagrama Entidade Relacionamento da Solução
+![Diag_Entidade_Relacionamento](https://github.com/DevRafaelSa/Attornatus-test-backend-Java/blob/main/DER%20teste.png)
 
 ## Soluções - Endpoints - Método
 - Criar uma pessoa:              localhost:8080/api/cadastrarPessoa                             - POST
