@@ -16,21 +16,21 @@ A aplicação solicitada por ocasião do Teste Técnico para uma vaga de Backend
 
 
 
-## Soluções(Endpoints)
-- Criar uma pessoa:              localhost:8080/api/cadastrarPessoa                             - METODO.POST
-- Editar uma pessoa:             localhost:8080/api/pessoas/{idPessoa}                          - METODO.PUT
-- Consultar uma pessoa:          localhost:8080/api/pessoas/{idPessoa}                          - METODO.GET
-- Listar pessoas:                localhost:8080/api/pessoas/todos                               - METODO.GET
-- Criar endereço para pessoa:    localhost:8080/api/addEnderecoAPessoa/pessoaId/1/endereco/1    - METODO.POST
-- Listar endereços da pessoa:    localhost:8080/api/enderecos/{idPessoa}                        - METODO.GET
-- Edita Endereço como Principal: localhost:8080/api/escolhendoEnderecoPrincipal/{idEndereco}    - METODO.PUT
-- Retornar endereço principal:   localhost:8080/api/enderecoPrincipal/{idPessoa}                - METODO.GET
-- Cria um endereço               localhost:8080/api/cadastrarEndereco                           - METODO.POST
-- Listar endereços:              localhost:8080/api/endereco/todos                              - METODO.GET
+## Soluções - Endpoints - Método
+- Criar uma pessoa:              localhost:8080/api/cadastrarPessoa                             - POST
+- Editar uma pessoa:             localhost:8080/api/pessoas/{idPessoa}                          - PUT
+- Consultar uma pessoa:          localhost:8080/api/pessoas/{idPessoa}                          - GET
+- Listar pessoas:                localhost:8080/api/pessoas/todos                               - GET
+- Criar endereço para pessoa:    localhost:8080/api/addEnderecoAPessoa/pessoaId/1/endereco/1    - POST
+- Listar endereços da pessoa:    localhost:8080/api/enderecos/{idPessoa}                        - GET
+- Edita Endereço como Principal: localhost:8080/api/escolhendoEnderecoPrincipal/{idEndereco}    - PUT
+- Retornar endereço principal:   localhost:8080/api/enderecoPrincipal/{idPessoa}                - GET
+- Cria um endereço               localhost:8080/api/cadastrarEndereco                           - POST
+- Listar endereços:              localhost:8080/api/endereco/todos                              - GET
 
 
 # Tecnologias utilizadas
-- Java
+- Java 17
 - Spring Boot
 - Spring Validation
 - JPA / Hibernate
