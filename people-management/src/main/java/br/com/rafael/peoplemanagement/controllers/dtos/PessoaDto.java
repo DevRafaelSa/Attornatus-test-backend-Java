@@ -1,7 +1,7 @@
 package br.com.rafael.peoplemanagement.controllers.dtos;
 
-import br.com.rafael.peoplemanegement.models.Endereco;
-import br.com.rafael.peoplemanegement.models.Pessoa;
+import br.com.rafael.peoplemanagement.models.Endereco;
+import br.com.rafael.peoplemanagement.models.Pessoa;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

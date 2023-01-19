@@ -1,9 +1,9 @@
 package br.com.rafael.peoplemanagement.services;
 
-import br.com.rafael.peoplemanegement.models.Pessoa;
-import br.com.rafael.peoplemanegement.repositories.PessoaRepository;
-import br.com.rafael.peoplemanegement.services.exceptions.DataBaseException;
-import br.com.rafael.peoplemanegement.services.exceptions.ResourceNotFoundException;
+import br.com.rafael.peoplemanagement.models.Pessoa;
+import br.com.rafael.peoplemanagement.repositories.PessoaRepository;
+import br.com.rafael.peoplemanagement.services.exceptions.DataBaseException;
+import br.com.rafael.peoplemanagement.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -19,7 +19,7 @@ public class PessoaService {
     @Autowired
     private PessoaRepository repository;
 
-    public List<Pessoa> findAll() {
+    public List<Pessoa> findall() {
         return repository.findAll();
     }
 
@@ -27,9 +27,6 @@ public class PessoaService {
         Optional<Pessoa> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
-
-    public Pessoa insert(Pessoa obj) {
-        return repository.save(obj); }
 
 
     public void deletar(Long id) {
@@ -50,7 +47,6 @@ public class PessoaService {
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }
-
     }
 
     private void updateData(Pessoa entity, Pessoa obj) {

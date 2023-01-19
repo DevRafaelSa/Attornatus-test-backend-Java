@@ -1,27 +1,28 @@
 package br.com.rafael.peoplemanagement.controllers;
 
-import br.com.rafael.peoplemanegement.controllers.dtos.EnderecoDto;
-import br.com.rafael.peoplemanegement.controllers.dtos.PessoaDto;
-import br.com.rafael.peoplemanegement.controllers.forms.EnderecoForm;
-import br.com.rafael.peoplemanegement.controllers.forms.PessoaForm;
-import br.com.rafael.peoplemanegement.models.Endereco;
-import br.com.rafael.peoplemanegement.models.Pessoa;
-import br.com.rafael.peoplemanegement.repositories.EnderecoRepository;
-import br.com.rafael.peoplemanegement.repositories.PessoaRepository;
-import br.com.rafael.peoplemanegement.services.EnderecoService;
-import br.com.rafael.peoplemanegement.services.PessoaService;
+import br.com.rafael.peoplemanagement.controllers.dtos.EnderecoDto;
+import br.com.rafael.peoplemanagement.controllers.dtos.PessoaDto;
+import br.com.rafael.peoplemanagement.controllers.forms.EnderecoForm;
+import br.com.rafael.peoplemanagement.controllers.forms.PessoaForm;
+import br.com.rafael.peoplemanagement.models.Endereco;
+import br.com.rafael.peoplemanagement.models.Pessoa;
+import br.com.rafael.peoplemanagement.repositories.EnderecoRepository;
+import br.com.rafael.peoplemanagement.repositories.PessoaRepository;
+import br.com.rafael.peoplemanagement.services.EnderecoService;
+import br.com.rafael.peoplemanagement.services.PessoaService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/api/pessoas")
+@RequestMapping(value = "/api")
 public class Controller {
 
     @Autowired
@@ -46,33 +47,33 @@ public class Controller {
         }else return new ResponseEntity<>("Essa pessoa já existe", HttpStatus.BAD_REQUEST);
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/pessoas/{id}")
     public ResponseEntity<Pessoa> update(@PathVariable Long id, @RequestBody Pessoa pessoa) {
         pessoa = pessoaService.update(id, pessoa);
         return ResponseEntity.ok().body(pessoa);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/pessoas/{id}")
     public ResponseEntity<Pessoa> findById(@PathVariable Long id) {
         Pessoa obj = pessoaService.findById(id);
         return ResponseEntity.ok().body(obj);
     }
 
-    @GetMapping
+    @GetMapping(value = "/pessoas/todos")
     public ResponseEntity<List<Pessoa>> findAll() {
-        List<Pessoa> list = pessoaService.findAll();
+        List<Pessoa> list = pessoaService.findall();
         return ResponseEntity.ok().body(list);
     }
 
-    @PutMapping("/addEndereco/pessoaId/{pessoaId}/endereco/{enderecoId}")
+    @PutMapping("/addEnderecoAPessoa/pessoaId/{pessoaId}/endereco/{enderecoId}")
     @Transactional
-    public ResponseEntity<?> addEndereco (@PathVariable Long pessoaId, @PathVariable Long enderecoId){
+    public ResponseEntity<?> addEnderecoAPessoa (@PathVariable Long pessoaId, @PathVariable Long enderecoId){
         Optional<Pessoa> pessoa = enderecoService.encontraPessoa(pessoaId);
         if (pessoa.isPresent()) {
             Optional<Endereco> endereco = enderecoRepository.findById(enderecoId);
             if(endereco.isPresent()) {
                 Endereco endereco1 = endereco.get();
-                endereco1.setPessoa(pessoa.get());
+                endereco1.setPessoas(Collections.singletonList(pessoa.get()));
                 return new ResponseEntity<>(new EnderecoDto(endereco1), HttpStatus.CREATED);
             }else return new ResponseEntity<>("Nenhuma pessoa encontrada", HttpStatus.NO_CONTENT);
         }else return new ResponseEntity<>("Nenhum endereco encontrado", HttpStatus.NO_CONTENT);
@@ -81,18 +82,29 @@ public class Controller {
     @PostMapping(value = "/cadastrarEndereco")
     public ResponseEntity<?> criarEndereco (@RequestBody EnderecoForm enderecoForm){
         if(!enderecoRepository.existsByLogradouroAndAndNumero(enderecoForm.getLogradouro(), enderecoForm.getNumero())){
-            Pessoa pessoa = pessoaService.findById(enderecoForm.getIdPessoa());
-            Endereco endereco = new Endereco(enderecoForm.getLogradouro(), enderecoForm.getCep(), enderecoForm.getNumero(), enderecoForm.getCidade(), pessoa);
+            Endereco endereco = new Endereco(enderecoForm.getLogradouro(), enderecoForm.getCep(), enderecoForm.getNumero(), enderecoForm.getCidade());
             enderecoRepository.save(endereco);
             return new ResponseEntity<>(new EnderecoDto(endereco), HttpStatus.CREATED);
         }else return new ResponseEntity<>("Essa pessoa já existe", HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping(value = "/enderecos/{idPessoa}")
-    public ResponseEntity<?> listaEnderecosDaPessoa(@PathVariable Long idPessoa){
-        Optional<Endereco> enderecos = enderecoRepository.findAllByPessoaId(idPessoa);
-        if(enderecos.isPresent()) return new ResponseEntity<>(enderecos.stream().map(EnderecoDto::new).collect(Collectors.toList()), HttpStatus.OK);
-        else return new ResponseEntity<>("Nenhum endereço encontrado", HttpStatus.NO_CONTENT);
+    public ResponseEntity<List<Endereco>> listaEnderecos(@PathVariable Long idPessoa){
+        enderecoService.encontrandoEnderecosDaPessoa(idPessoa);
+        return ResponseEntity.ok().body(enderecoService.encontrandoEnderecosDaPessoa(idPessoa));
+    }
+
+    @PutMapping(value = "/escolhendoEnderecoPrincipal/{id}")
+    public ResponseEntity<Endereco> escolhendoEnderecoPrincipal(@PathVariable Long id) {
+        enderecoService.findById(id);
+        Endereco endereco = enderecoService.atualizandoEnderecoPrincipal(id);
+        return ResponseEntity.ok().body(endereco);
+    }
+
+    @GetMapping(value = "/endereco/todos")
+    public ResponseEntity<List<Endereco>> encontraTodos() {
+        List<Endereco> list = enderecoService.findall();
+        return ResponseEntity.ok().body(list);
     }
 
 }

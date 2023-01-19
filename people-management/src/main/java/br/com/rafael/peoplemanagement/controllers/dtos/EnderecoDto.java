@@ -1,11 +1,14 @@
 package br.com.rafael.peoplemanagement.controllers.dtos;
 
-import br.com.rafael.peoplemanegement.models.Endereco;
+import br.com.rafael.peoplemanagement.models.Endereco;
+import br.com.rafael.peoplemanagement.models.Pessoa;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter @Setter @NoArgsConstructor
 public class EnderecoDto implements Serializable {
@@ -15,7 +18,8 @@ public class EnderecoDto implements Serializable {
     private String cep;
     private String numero;
     private String cidade;
-    private Long pessoaId;
+    private Boolean principal;
+    private List<Pessoa> pessoas = new ArrayList<>();
 
     public EnderecoDto(Endereco endereco) {
         this.id = endereco.getId();
@@ -23,6 +27,7 @@ public class EnderecoDto implements Serializable {
         this.cep = endereco.getCep();
         this.numero = endereco.getNumero();
         this.cidade = endereco.getCidade();
-        this.pessoaId = endereco.getPessoa().getId();
+        this.principal = endereco.getPrincipal();
+        this.pessoas = endereco.getPessoas();
     }
 }

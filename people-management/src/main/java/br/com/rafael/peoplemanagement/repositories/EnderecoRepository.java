@@ -1,17 +1,16 @@
 package br.com.rafael.peoplemanagement.repositories;
 
-import br.com.rafael.peoplemanegement.models.Endereco;
+import br.com.rafael.peoplemanagement.models.Endereco;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.List;
 
-@Transactional
+
 @Repository
 public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
 
     Boolean existsByLogradouroAndAndNumero (String logradouro, String numero);
-    Optional<Endereco> findAllByPessoaId (Long idPessoa);
+//    public List<Endereco> findEnderecosByPessoasExists (Long idPessoa);
 
 }

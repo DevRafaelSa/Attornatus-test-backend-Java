@@ -1,9 +1,11 @@
 package br.com.rafael.peoplemanagement.services;
 
-import br.com.rafael.peoplemanegement.models.Endereco;
-import br.com.rafael.peoplemanegement.models.Pessoa;
-import br.com.rafael.peoplemanegement.repositories.EnderecoRepository;
-import br.com.rafael.peoplemanegement.repositories.PessoaRepository;
+import br.com.rafael.peoplemanagement.models.Endereco;
+import br.com.rafael.peoplemanagement.models.Pessoa;
+import br.com.rafael.peoplemanagement.repositories.EnderecoRepository;
+import br.com.rafael.peoplemanagement.repositories.PessoaRepository;
+import br.com.rafael.peoplemanagement.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +30,38 @@ public class EnderecoService {
         return obj.get();
     }
 
+    public List<Endereco> encontrandoEnderecosDaPessoa (Long idPessoa) {
+        try {
+            Optional<Pessoa> pessoa = pessoaRepository.findById(idPessoa);
+            return pessoa.get().getEnderecos().stream().toList();
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(idPessoa);
+        }
+    }
+
     public Optional<Pessoa> encontraPessoa(Long pessoaId) {
         if(pessoaRepository.existsById(pessoaId)){
-            return pessoaRepository.findById(pessoaId);
+            return Optional.of(pessoaRepository.findById(pessoaId).get());
         } else return Optional.empty();
+    }
+
+    public Endereco atualizandoEnderecoPrincipal(Long id/*, Endereco obj*/) {
+        try {
+            Endereco entity = enderecoRepository.getReferenceById(id);
+            escolhePrincipal(entity);
+            return enderecoRepository.save(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
+
+    }
+
+    private void escolhePrincipal(Endereco entity/*, Endereco obj*/) {
+//        entity.setLogradouro(obj.getLogradouro());
+//        entity.setCep(obj.getCep());
+//        entity.setNumero(obj.getNumero());
+//        entity.setCidade(obj.getCidade());
+        entity.setPrincipal(Boolean.TRUE);
+//        entity.setPessoas(obj.getPessoas());
     }
 }

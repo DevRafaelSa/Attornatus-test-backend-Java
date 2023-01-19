@@ -9,7 +9,6 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,19 +26,13 @@ public class Pessoa implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDate;
 
-    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "pessoas", cascade = CascadeType.ALL)
     private List<Endereco> enderecos;
 
     public Pessoa(String name, LocalDate birthDate) {
         this.name = name;
         this.birthDate = birthDate;
-        this.enderecos = new ArrayList<>();
     }
-
-    public void insereEndereco(Endereco endereco){
-        enderecos.add(endereco);
-    }
-
 
     @Override
     public boolean equals(Object o) {
