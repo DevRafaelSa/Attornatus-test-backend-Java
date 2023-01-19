@@ -26,7 +26,7 @@ A aplicação solicitada por ocasião do Teste Técnico para uma vaga de Backend
 - Editar uma pessoa:             localhost:8080/api/pessoas/{idPessoa}                          - PUT
 - Consultar uma pessoa:          localhost:8080/api/pessoas/{idPessoa}                          - GET
 - Listar pessoas:                localhost:8080/api/pessoas/todos                               - GET
-- Criar endereço para pessoa:    localhost:8080/api/addEnderecoAPessoa/pessoaId/1/endereco/1    - POST
+- Criar endereço para pessoa:    localhost:8080/api/addEnderecoAPessoa/pessoaId/{idPessoa}/endereco/{idEndereco}    - POST
 - Listar endereços da pessoa:    localhost:8080/api/enderecos/{idPessoa}                        - GET
 - Edita Endereço como Principal: localhost:8080/api/escolhendoEnderecoPrincipal/{idEndereco}    - PUT
 - Retornar endereço principal:   localhost:8080/api/enderecoPrincipal/{idPessoa}                - GET
