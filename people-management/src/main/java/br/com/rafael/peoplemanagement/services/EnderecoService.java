@@ -27,7 +27,7 @@ public class EnderecoService {
 
     public Endereco findById(Long id) {
         Optional<Endereco> obj = enderecoRepository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public List<Endereco> encontrandoEnderecosDaPessoa (Long idPessoa) {
@@ -45,7 +45,7 @@ public class EnderecoService {
         } else return Optional.empty();
     }
 
-    public Endereco atualizandoEnderecoPrincipal(Long id/*, Endereco obj*/) {
+    public Endereco atualizandoEnderecoPrincipal(Long id) {
         try {
             Endereco entity = enderecoRepository.getReferenceById(id);
             escolhePrincipal(entity);
@@ -53,15 +53,9 @@ public class EnderecoService {
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException(id);
         }
-
     }
 
-    private void escolhePrincipal(Endereco entity/*, Endereco obj*/) {
-//        entity.setLogradouro(obj.getLogradouro());
-//        entity.setCep(obj.getCep());
-//        entity.setNumero(obj.getNumero());
-//        entity.setCidade(obj.getCidade());
+    private void escolhePrincipal(Endereco entity) {
         entity.setPrincipal(Boolean.TRUE);
-//        entity.setPessoas(obj.getPessoas());
     }
 }
