@@ -10,11 +10,13 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.List;
 
-@Entity @Table(name = "tb_enderecos")
+@Entity
+@Table(name = "tb_enderecos")
 @Getter @Setter @NoArgsConstructor
 public class Endereco implements Serializable {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull(message = "Logradouro é obrigatório")

@@ -3,12 +3,12 @@ package br.com.rafael.peoplemanagement.controllers.exceptions;
 
 import br.com.rafael.peoplemanagement.services.exceptions.DataBaseException;
 import br.com.rafael.peoplemanagement.services.exceptions.ResourceNotFoundException;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
 
 @ControllerAdvice

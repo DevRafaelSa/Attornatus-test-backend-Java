@@ -10,8 +10,6 @@ import br.com.rafael.peoplemanagement.repositories.EnderecoRepository;
 import br.com.rafael.peoplemanagement.repositories.PessoaRepository;
 import br.com.rafael.peoplemanagement.services.EnderecoService;
 import br.com.rafael.peoplemanagement.services.PessoaService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +23,6 @@ import java.util.function.Predicate;
 
 @RestController
 @RequestMapping(value = "/api")
-@Api(value = "People-Management")
 public class Controller {
 
     @Autowired
@@ -40,7 +37,6 @@ public class Controller {
     @Autowired
     private EnderecoService enderecoService;
 
-    @ApiOperation(value = "Cadastra uma pessoa")
     @PostMapping(value = "/cadastrarPessoa")
     public ResponseEntity<?> criarPessoa (@RequestBody PessoaForm pessoaForm){
         if(!pessoaRepository.existsByNameAndAndBirthDate(pessoaForm.getName(), pessoaForm.getBirthDate())){
@@ -51,14 +47,12 @@ public class Controller {
     }
 
 
-    @ApiOperation(value = "Edita uma pessoa pelo Id")
     @PutMapping(value = "/pessoas/{id}")
     public ResponseEntity<Pessoa> update(@PathVariable Long id, @RequestBody Pessoa pessoa) {
         pessoa = pessoaService.update(id, pessoa);
         return ResponseEntity.ok().body(pessoa);
     }
 
-    @ApiOperation(value = "Retorna uma pessoa pelo Id")
     @GetMapping(value = "/pessoas/{id}")
     public ResponseEntity<Pessoa> findById(@PathVariable Long id) {
         Pessoa obj = pessoaService.findById(id);
@@ -66,14 +60,12 @@ public class Controller {
     }
 
 
-    @ApiOperation(value = "Retorna todas as pessoas")
     @GetMapping(value = "/pessoas/todos")
     public ResponseEntity<List<Pessoa>> findAll() {
         List<Pessoa> list = pessoaService.findall();
         return ResponseEntity.ok().body(list);
     }
 
-    @ApiOperation(value = "Retorna todas as pessoas")
     @PutMapping("/addEnderecoAPessoa/pessoaId/{pessoaId}/endereco/{enderecoId}")
     @Transactional
     public ResponseEntity<?> addEnderecoAPessoa (@PathVariable Long pessoaId, @PathVariable Long enderecoId){
@@ -115,7 +107,6 @@ public class Controller {
         List<Endereco> list = enderecoService.findall();
         return ResponseEntity.ok().body(list);
     }
-
 
     @GetMapping(value = "/enderecoPrincipal/{idPessoa}")
     public ResponseEntity<Endereco> retornaEnderecoPrincipal(@PathVariable Long idPessoa) {

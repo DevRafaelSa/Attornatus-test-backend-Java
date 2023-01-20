@@ -12,11 +12,13 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-@Entity @Table(name = "tb_pessoas")
+@Entity
+@Table(name = "tb_pessoas")
 @NoArgsConstructor @Getter @Setter
 public class Pessoa implements Serializable {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull(message = "Nome é obrigatório")

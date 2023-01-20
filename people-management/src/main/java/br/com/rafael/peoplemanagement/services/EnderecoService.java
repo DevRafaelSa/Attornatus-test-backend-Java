@@ -47,7 +47,7 @@ public class EnderecoService {
 
     public Endereco atualizandoEnderecoPrincipal(Long id) {
         try {
-            Endereco entity = enderecoRepository.getReferenceById(id);
+            Endereco entity = enderecoRepository.getById(id);
             escolhePrincipal(entity);
             return enderecoRepository.save(entity);
         } catch (EntityNotFoundException e) {
