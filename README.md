@@ -3,7 +3,7 @@
 
 # Sobre o projeto
 
-A aplicação solicitada por ocasião do Teste Técnico para uma vaga de Backend Java na Attornatus Procuradoria Digital consiste em uma API que gerencie e maneje pessoas e seus endereços, podendo ainda elencar, dentre este último, um endereço principal.
+A aplicação faz parte do Teste Técnico para Desenvolvedor Backend Java na Attornatus Procuradoria Digital e consiste em uma API que gerencie e maneje pessoas e seus endereços, podendo ainda, basicamente, elencar um endereço principal.
 
 ## Features/Serviços Solicitados
 - Criar uma pessoa
@@ -18,10 +18,23 @@ A aplicação solicitada por ocasião do Teste Técnico para uma vaga de Backend
 - Testes
 - Clean Code
 
+# Solução do Teste
+
+## Tecnologias utilizadas
+- Java 17
+- Spring Boot
+- Spring Validation
+- JPA / Hibernate
+- Lombok
+- Maven
+- Banco de dados: H2
+- Testes: Postman
+- Docker
+
 ## Diagrama Entidade Relacionamento da Solução
 ![Diag_Entidade_Relacionamento](https://github.com/DevRafaelSa/Attornatus-test-backend-Java/blob/main/DER%20teste.png)
 
-## Soluções - Endpoints - Método
+## Serviços - Endpoints - Método
 - Criar uma pessoa:              localhost:8080/api/cadastrarPessoa                             - POST
 - Editar uma pessoa:             localhost:8080/api/pessoas/{idPessoa}                          - PUT
 - Consultar uma pessoa:          localhost:8080/api/pessoas/{idPessoa}                          - GET
@@ -33,29 +46,26 @@ A aplicação solicitada por ocasião do Teste Técnico para uma vaga de Backend
 - Cria um endereço               localhost:8080/api/cadastrarEndereco                           - POST
 - Listar endereços:              localhost:8080/api/endereco/todos                              - GET
 
-## Soluções - Testes - Clean Code
-- Testes
-    A aplicação foi testada no Postman e Swagger2.
+## Testes - Clean Code
+- Testes:
 
-- Clean Code
+    A aplicação foi testada no Postman.
+
+- Clean Code:
+
     Padrões de projetos: dto e form para encapsular melhor os dados, tratamento de exceções, personalização de respostas de exceções do sistema. 
     
- # Documentação - Swagger - http://localhost:8080/swagger-ui.html
+# Rodando a aplicação
 
-add foto do swagger
+ ## Opção 1: Docker
+  - Link para subir o Container
+```
+docker run -p 8080:8080 rafaelsadev/teste-attornatus-people-management:0.0.1-SNAPSHOT 
 
-# Tecnologias utilizadas
-- Java 17
-- Spring Boot
-- Spring Validation
-- JPA / Hibernate
-- Lombok
-- Maven
-- Banco de dados: H2
-- Testes: Postman e Swagger
-- Documentação: Swagger
+#lembre-se de não estar rodando nada na porta 8080 no momento em que for subir o container
+```
 
-
+## Opção 2: Linha de Comando
 ```bash
 # clonar repositório
 https://github.com/DevRafaelSa/Attornatus-test-backend-Java.git
@@ -67,7 +77,7 @@ cd people-management
 ./mvnw spring-boot:run
 ```
 
-## Questões do Teste
+# Questões do Teste
 - Questão 1: Durante a implementação de uma nova funcionalidade de software solicitada, quais critérios você avalia e implementa para garantia de qualidade de software?
 
 
