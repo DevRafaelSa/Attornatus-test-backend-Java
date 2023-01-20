@@ -58,11 +58,10 @@ A aplicação faz parte do Teste Técnico para Desenvolvedor Backend Java na Att
 # Rodando a aplicação
 
  ## Opção 1: Docker
-  - Link para subir o Container
+  - Link para subir o Container (RECOMENDADO)
 ```
 docker run -p 8080:8080 rafaelsadev/teste-attornatus-people-management:0.0.1-SNAPSHOT 
 
-#lembre-se de não estar rodando nada na porta 8080 no momento em que for subir o container
 ```
 
 ## Opção 2: Linha de Comando
@@ -99,3 +98,4 @@ RESPOSTA:
 Rafael Nunes de Sá Santos
 
 https://www.linkedin.com/in/rafaelsasantos/
+Contato: +55 83 99951-0276
